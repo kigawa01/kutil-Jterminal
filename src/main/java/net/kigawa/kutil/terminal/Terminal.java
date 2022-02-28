@@ -28,6 +28,13 @@ public class Terminal implements Module {
     public Terminal(boolean jline, LoggerInterface logger) {
         this.logger = logger;
         this.jline = jline;
+
+        if (terminal != null) {
+            logger.warning("terminal is already exit!");
+            return;
+        }
+
+        terminal = this;
     }
 
     @SafeVarargs
@@ -38,10 +45,7 @@ public class Terminal implements Module {
     @Override
     public synchronized void enable() {
         logger.info("enable terminal...");
-        if (terminal != null) {
-            logger.warning("terminal is already exit!");
-            return;
-        }
+
 
         try {
             if (jline) {
@@ -54,7 +58,6 @@ public class Terminal implements Module {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        terminal = this;
 
         terminalHandler = new TerminalHandler(Terminal.terminal, new Formatter(), logger);
 
@@ -137,7 +140,7 @@ public class Terminal implements Module {
 
             writer.write(str);
             writer.flush();
-            consoleReader.drawLine();
+            if (jline) consoleReader.drawLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
