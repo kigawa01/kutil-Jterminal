@@ -1,8 +1,8 @@
-# NAME
+# kutil-Jterminal
 
 ## About
 
-*
+* javaのterminal用lib
 
 ## Requirement
 
