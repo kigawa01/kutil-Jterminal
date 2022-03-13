@@ -102,7 +102,7 @@ public class Terminal implements Module {
                     }
                     line = reader.readLine();
                 }
-
+                if (line == null) return;
                 for (Consumer<String> consumer : consumerList) {
                     try {
                         consumer.accept(line);
@@ -112,6 +112,7 @@ public class Terminal implements Module {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                break;
             }
         }
     }
