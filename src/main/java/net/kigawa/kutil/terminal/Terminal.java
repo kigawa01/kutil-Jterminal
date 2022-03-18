@@ -101,7 +101,6 @@ public class Terminal implements Module {
                     }
                     line = reader.readLine();
                 }
-                writer.write("\n");
                 for (Consumer<String> consumer : consumerList) {
                     try {
                         consumer.accept(line);
