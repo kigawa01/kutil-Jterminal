@@ -6,7 +6,7 @@
 
     <groupId>net.kigawa.kutil</groupId>
     <artifactId>terminal</artifactId>
-    <version>2.0dev</version>
+    <version>1.2dev</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

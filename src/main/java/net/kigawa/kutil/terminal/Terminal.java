@@ -20,16 +20,14 @@ public class Terminal implements Module {
     private final ArrayList<Consumer<String>> consumerList = new ArrayList<>();
     private final boolean jline;
     private final LoggerInterface logger;
-    private final ThreadExecutor threadExecutor;
     private ConsoleReader consoleReader;
     private BufferedReader reader;
     private BufferedWriter writer;
     private TerminalHandler terminalHandler;
 
-    public Terminal(boolean jline, LoggerInterface logger, ThreadExecutor threadExecutor) {
+    public Terminal(boolean jline, LoggerInterface logger) {
         this.logger = logger;
         this.jline = jline;
-        this.threadExecutor = threadExecutor;
 
         if (terminal != null) {
             logger.warning("terminal is already exit!");
@@ -69,7 +67,7 @@ public class Terminal implements Module {
             }
         }
 
-        threadExecutor.execute(this::read);
+        ThreadExecutor.getInstance(Terminal.class.getName()).execute(this::read);
     }
 
     @Override
