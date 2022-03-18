@@ -6,7 +6,7 @@
 
     <groupId>net.kigawa.kutil</groupId>
     <artifactId>terminal</artifactId>
-    <version>1.0dev</version>
+    <version>2.0dev</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -22,6 +22,11 @@
         <dependency>
             <groupId>net.kigawa.kutil</groupId>
             <artifactId>log</artifactId>
+            <version>1.0dev</version>
+        </dependency>
+        <dependency>
+            <groupId>net.kigawa.kutil</groupId>
+            <artifactId>thread</artifactId>
             <version>1.0dev</version>
         </dependency>
         <dependency>

@@ -3,8 +3,8 @@ package net.kigawa.kutil.terminal;
 import jline.console.ConsoleReader;
 import net.kigawa.kutil.kutil.interfaces.LoggerInterface;
 import net.kigawa.kutil.kutil.interfaces.Module;
-import net.kigawa.kutil.kutil.thread.ThreadExecutors;
 import net.kigawa.kutil.log.log.Formatter;
+import net.kigawa.kutil.thread.ThreadExecutor;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -20,14 +20,16 @@ public class Terminal implements Module {
     private final ArrayList<Consumer<String>> consumerList = new ArrayList<>();
     private final boolean jline;
     private final LoggerInterface logger;
+    private final ThreadExecutor threadExecutor;
     private ConsoleReader consoleReader;
     private BufferedReader reader;
     private BufferedWriter writer;
     private TerminalHandler terminalHandler;
 
-    public Terminal(boolean jline, LoggerInterface logger) {
+    public Terminal(boolean jline, LoggerInterface logger, ThreadExecutor threadExecutor) {
         this.logger = logger;
         this.jline = jline;
+        this.threadExecutor = threadExecutor;
 
         if (terminal != null) {
             logger.warning("terminal is already exit!");
@@ -45,7 +47,6 @@ public class Terminal implements Module {
     @Override
     public synchronized void enable() {
         logger.info("enable terminal...");
-
 
         try {
             if (jline) {
@@ -68,7 +69,7 @@ public class Terminal implements Module {
             }
         }
 
-        ThreadExecutors.execute(this::read);
+        threadExecutor.execute(this::read);
     }
 
     @Override
