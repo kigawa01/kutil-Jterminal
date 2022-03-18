@@ -15,7 +15,7 @@ import java.util.logging.Handler;
 
 public class Terminal implements Module {
     public static Terminal terminal;
-    public static String PREFIX = "]";
+    public static String PREFIX = ">";
 
     private final ArrayList<Consumer<String>> consumerList = new ArrayList<>();
     private final boolean jline;
@@ -101,6 +101,7 @@ public class Terminal implements Module {
                     }
                     line = reader.readLine();
                 }
+                writer.write("\n");
                 for (Consumer<String> consumer : consumerList) {
                     try {
                         consumer.accept(line);
