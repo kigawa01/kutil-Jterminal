@@ -66,7 +66,6 @@ public class Terminal implements Module {
                 java.util.logging.Logger.getLogger("").removeHandler(handler);
             }
         }
-
         ThreadExecutor.getInstance(Terminal.class.getName()).execute(this::read);
     }
 
@@ -92,7 +91,8 @@ public class Terminal implements Module {
                 String line;
                 if (jline) {
                     synchronized (this) {
-                        if (consoleReader == null) return;
+                        if (consoleReader == null)
+                            return;
                     }
                     line = consoleReader.readLine(PREFIX, null);
                 } else {
@@ -101,7 +101,6 @@ public class Terminal implements Module {
                     }
                     line = reader.readLine();
                 }
-                if (line == null) return;
                 for (Consumer<String> consumer : consumerList) {
                     try {
                         consumer.accept(line);
